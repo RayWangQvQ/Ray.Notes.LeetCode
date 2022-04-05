@@ -5,6 +5,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Solution9
 {
@@ -12,6 +13,12 @@ namespace Solution9
     public class Solution
     {
         public bool IsPalindrome(int x)
+        {
+            //return 转字符串(x);
+            return 倒转数字(x);
+        }
+
+        private bool 转字符串(int x)
         {
             var s = x.ToString();
 
@@ -21,6 +28,38 @@ namespace Solution9
             {
                 if (s[i] != s[length - 1 - i]) return false;
             }
+            return true;
+        }
+
+        private bool 倒转数字(int x)
+        {
+            if (x < 0) return false;
+
+            var source = x;
+            double reverse = 0;
+
+            int count = 0;
+            while (x > 0)
+            {
+                x /= 10;
+                count++;
+            }
+
+            x = source;
+            for (int i = 1; i <= count; i++)
+            {
+                var remainder = x % 10;
+                reverse += remainder * Math.Pow(10, count - i);
+
+                x /= 10;
+            }
+
+            return source == reverse;
+        }
+
+        private bool 倒转一半数字(int x)
+        {
+            //todo
             return true;
         }
     }
