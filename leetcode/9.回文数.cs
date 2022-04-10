@@ -15,7 +15,8 @@ namespace Solution9
         public bool IsPalindrome(int x)
         {
             //return 转字符串(x);
-            return 倒转数字(x);
+            //return 倒转数字(x);
+            return 倒转一半数字(x);
         }
 
         private bool 转字符串(int x)
@@ -59,8 +60,20 @@ namespace Solution9
 
         private bool 倒转一半数字(int x)
         {
-            //todo
-            return true;
+            if (x < 0) return false;
+            if (x % 10 == 0 && x != 0) return false;
+
+            int reverseHalf = 0;
+
+            while (x > reverseHalf)
+            {
+                var remainder = x % 10;
+                reverseHalf = reverseHalf * 10 + remainder;
+
+                x /= 10;
+            }
+
+            return x == reverseHalf || x == reverseHalf / 10;
         }
     }
     // @lc code=end
@@ -73,6 +86,8 @@ namespace Solution9
         [DataRow(0, true)]
         [DataRow(12321, true)]
         [DataRow(123, false)]
+        [DataRow(21, false)]
+        [DataRow(10, false)]
         public void Test(int x, bool assert)
         {
             var re = new Solution9.Solution().IsPalindrome(x);
